@@ -68,7 +68,7 @@ const LoginPage: React.FC = () => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
           >
-            Login
+            Sign-In
           </button>
         </form>
       </div>

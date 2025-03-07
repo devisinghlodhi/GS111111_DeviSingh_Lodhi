@@ -29,7 +29,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <div className="flex justify-between items-center px-3 py-1">
       {/* Left Section: Logo & App Name */}
       <div className="flex items-center gap-2">
-        <img src="/logo.svg" alt="Logo" className="w-25" />
+        <img src="/logo.svg" alt="Logo" className="w-35" />
       </div>
 
       <h5 className="text-lg font-semibold">Data Viewer App</h5>
@@ -43,7 +43,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   
     <div className="flex h-screen">
       {/* Sidebar */}
-      <div className="w-50 p-3 space-y-3 transition-transform">
+      <div className="w-40 p-3 space-y-3 transition-transform">
         <nav>
           <ul className="space-y-2">
           {navItems.map(({ path, label, Icon }) => (
