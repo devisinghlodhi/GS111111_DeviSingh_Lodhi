@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Layout from './pages/Layout';
+import LoginPage from './pages/login/Login';
 import Store from './pages/Store/Store';
 import Sku from './pages/Sku/Sku';
 import Planning from './pages/Planning/Planning';
@@ -14,6 +15,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
+      <Route path="/" element={<LoginPage />} />
       <Route path="/store" element={<Layout> <Store /> </Layout>} />
       <Route path="/sku" element={<Layout> <Sku /> </Layout>} />
       <Route path="/planning" element={<Layout> <Planning /> </Layout>} />

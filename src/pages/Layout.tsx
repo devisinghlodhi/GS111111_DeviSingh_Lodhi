@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { CircleUserRound } from "lucide-react";
 import { Store, Package, Calendar, BarChart } from "lucide-react";
+import UserProfile from "./Profile";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 const navItems = [
   { path: "/store", label: "Store", Icon: Store },
@@ -12,6 +15,14 @@ const navItems = [
 ];
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => { 
+  const { isLogin } = useSelector((store: RootState) => store.userReducer);
+  const navigate = useNavigate();
+  
+  useEffect(()=>{
+    if(!isLogin){
+      navigate("/")
+    }
+  }, [isLogin])
 
   return (
     <>
@@ -25,7 +36,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       
       {/* Right Section: User Profile */}
       <div className="flex items-center gap-2">
-      <CircleUserRound className="h-5 w-5" />
+      {/* <CircleUserRound className="h-5 w-5" /> */}
+      <UserProfile />
         </div>
     </div>
   
