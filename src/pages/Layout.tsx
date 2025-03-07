@@ -66,7 +66,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </div>
 
       <div className="flex flex-col flex-1">       
-        <main className="p-4 flex-1 bg-gray-200 overflow-auto">{children}</main>
+        <main className="p-4 flex-1 bg-gray-200">{children}</main>
       </div>
     </div>
     </>
