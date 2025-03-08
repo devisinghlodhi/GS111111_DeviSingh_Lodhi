@@ -3,14 +3,15 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { ClientSideRowModelModule } from "ag-grid-community";
+import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import StoreForm from "./Add";
+import UpdateStoreForm from "./Edit";
 
 const StorePage: React.FC = () => {
-  const [rowData, setRowData] = useState([
-    { seqNo: 1, id: "ST035", label: "San Francisco Bay Trends", city: "San Francisco", state: "CA" },
-    { seqNo: 2, id: "ST046", label: "Phoenix Sunwear", city: "Phoenix", state: "AZ" },
-    { seqNo: 3, id: "ST064", label: "Dallas Ranch Supply", city: "Dallas", state: "TX" },
-    { seqNo: 4, id: "ST066", label: "Atlanta Outfitters", city: "Atlanta", state: "GA" },
-  ]);
+
+  const { store_data } = useSelector((store: RootState) => store.dataReducer);
+  const dispatch = useDispatch();
 
   const columnDefs = [
     { headerName: "Seq No.", field: "seqNo", sortable: true, filter: true, width: 120 },
@@ -41,29 +42,23 @@ const StorePage: React.FC = () => {
   ];
 
   const handleDelete = (seqNo: number) => {
-    setRowData(rowData.filter((row) => row.seqNo !== seqNo));
+    // setRowData(rowData.filter((row) => row.seqNo !== seqNo));
+    dispatch({type: "delete_store", payload: seqNo})
   };
 
   const handleEdit = (data: any) => {
-    const newLabel = prompt("Edit Label:", data.label);
-    if (newLabel) {
-      setRowData(
-        rowData.map((row) => (row.seqNo === data.seqNo ? { ...row, label: newLabel } : row))
-      );
-    }
+    // const newLabel = prompt("Edit Label:", data.label);
+    // if (newLabel) {
+    //   // setstore_data(
+    //   //   store_data.map((row) => (row.seqNo === data.seqNo ? { ...row, label: newLabel } : row))
+    //   // );
+      
+    // }
+    dispatch({type: "openModal", payload: <UpdateStoreForm seqNo={data.seqNo} />})
   };
 
   const handleAdd = () => {
-    const newId = prompt("Enter ID:");
-    const newLabel = prompt("Enter Label:");
-    const newCity = prompt("Enter City:");
-    const newState = prompt("Enter State:");
-    if (newId && newLabel && newCity && newState) {
-      setRowData([
-        ...rowData,
-        { seqNo: rowData.length + 1, id: newId, label: newLabel, city: newCity, state: newState },
-      ]);
-    }
+    dispatch({type: "openModal", payload: <StoreForm />})
   };
 
   return (
@@ -75,7 +70,7 @@ const StorePage: React.FC = () => {
         </button>
         <div className="ag-theme-alpine w-full h-[600px] rounded-lg shadow-md border border-gray-200 overflow-hidden">
           <AgGridReact
-            rowData={rowData}
+            rowData={store_data}
             columnDefs={columnDefs}
             pagination={true}
             paginationPageSize={5}
