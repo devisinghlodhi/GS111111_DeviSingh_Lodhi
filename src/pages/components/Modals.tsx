@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../redux/store";
 
 const Modals: React.FC = () => {
   const { isOpen, content } = useSelector((store: RootState) => store.modalReducer);
@@ -10,11 +10,12 @@ const Modals: React.FC = () => {
   const [active, setActive] = useState<string | null>(null);
 
   const handleFocusIn = (e: FocusEvent) => {
-    if ((document.activeElement as HTMLElement)?.tagName === "INPUT") {
-      setActive(document.activeElement.tagName);
+    const activeElement = document.activeElement as HTMLElement | null;
+    if (activeElement && activeElement.tagName === "INPUT") {
+      setActive(activeElement.tagName);
     }
   };
-
+  
   useEffect(() => {
     document.addEventListener("focusin", handleFocusIn);
     return () => {
