@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../redux/store";
 
 const SKUForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const SKUForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (sku_data.some((sku) => sku.id === skuId)) {
+    if (sku_data.some((sku: any) => sku.id === skuId)) {
       setError("SKU ID already exists");
       return;
     }

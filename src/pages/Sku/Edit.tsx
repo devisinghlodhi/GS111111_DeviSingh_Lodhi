@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../redux/store";
 
 interface UpdateSKUFormProps {
     id: string;
@@ -10,7 +10,7 @@ const UpdateSKUForm: React.FC<UpdateSKUFormProps> = ({ id }) => {
   const dispatch = useDispatch();
   const { sku_data } = useSelector((state: RootState) => state.dataReducer);
 
-  const skuToUpdate = sku_data.find((sku) => sku.id === id) || {};
+  const skuToUpdate = sku_data.find((sku: any) => sku.id === id) || {};
 
   const [updatedLabel, setUpdatedLabel] = useState(skuToUpdate.label || "");
   const [updatedClass, setUpdatedClass] = useState(skuToUpdate.class || "");

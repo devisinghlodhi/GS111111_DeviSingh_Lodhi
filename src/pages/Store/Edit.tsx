@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../redux/store";
 
 interface UpdateStoreFormProps {
   seqNo: number;
@@ -10,7 +10,7 @@ const UpdateStoreForm: React.FC<UpdateStoreFormProps> = ({ seqNo }) => {
   const dispatch = useDispatch();
   const { store_data } = useSelector((store: RootState) => store.dataReducer);
 
-  const storeToUpdate = store_data.find((store) => store.seqNo === seqNo) || {};
+  const storeToUpdate = store_data.find((store: any) => store.seqNo === seqNo) || {};
 
   const [updatedLabel, setUpdatedLabel] = useState(storeToUpdate.label || "");
   const [updatedCity, setUpdatedCity] = useState(storeToUpdate.city || "");

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../redux/store";
 
 const StoreForm: React.FC = () => {
   const dispatch = useDispatch();

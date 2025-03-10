@@ -9,7 +9,7 @@ const Modals: React.FC = () => {
 
   const [active, setActive] = useState<string | null>(null);
 
-  const handleFocusIn = (e: FocusEvent) => {
+  const handleFocusIn = () => {
     const activeElement = document.activeElement as HTMLElement | null;
     if (activeElement && activeElement.tagName === "INPUT") {
       setActive(activeElement.tagName);

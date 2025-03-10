@@ -3,7 +3,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { RootState } from "../../redux/store";
 import { ClientSideRowModelModule } from "ag-grid-community";
 
 const Planning: React.FC = () => {
@@ -13,7 +13,7 @@ const Planning: React.FC = () => {
   const weeksPerMonth = 4;
 
   useEffect(() => {
-    const crossJoinData = store_data.flatMap((store) =>
+    const crossJoinData = store_data.flatMap((store: any) =>
       sku_data.map((sku) => {
         const row: any = {
           store: store.label,
@@ -91,7 +91,7 @@ const Planning: React.FC = () => {
     <div className="ag-theme-alpine" style={{ height: "80vh", width: "100%" }}>
       <AgGridReact
         rowData={rowData}
-        columnDefs={columnDefs}
+        columnDefs={columnDefs as any}
         pagination={true}
         paginationPageSize={10}
         modules={[ClientSideRowModelModule]}

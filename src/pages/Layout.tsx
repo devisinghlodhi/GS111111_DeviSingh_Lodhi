@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { Store, Package, Calendar, BarChart } from "lucide-react";
-import UserProfile from "./Profile";
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 
 const navItems = [
