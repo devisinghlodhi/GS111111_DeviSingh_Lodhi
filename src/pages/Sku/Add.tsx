@@ -17,7 +17,7 @@ const SKUForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (sku_data.some((sku) => sku.skuId === skuId)) {
+    if (sku_data.some((sku) => sku.id === skuId)) {
       setError("SKU ID already exists");
       return;
     }

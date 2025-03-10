@@ -1,28 +1,41 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from "react-router";
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Layout from './pages/Layout';
-import LoginPage from './pages/login/Login';
-import Store from './pages/Store/Store';
-import Sku from './pages/Sku/Sku';
-import Planning from './pages/Planning/Planning';
-import Charts from './pages/Charts/Charts';
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home";
+import StorePage from "./pages/Store/Store";
+import SignInPage from "./pages/SignIn";
+import SignUpPage from "./pages/SignUp";
+import Layout from "./pages/Layout";
+import Store from "./pages/Store/Store";
+import Sku from "./pages/Sku/Sku";
+import Planning from "./pages/Planning/Planning";
+import Charts from "./pages/Charts/Charts";
 
-function App() {
-
+export default function App() {
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/store" element={<Layout> <Store /> </Layout>} />
-      <Route path="/sku" element={<Layout> <Sku /> </Layout>} />
-      <Route path="/planning" element={<Layout> <Planning /> </Layout>} />
-      <Route path="/charts" element={<Layout> <Charts /> </Layout>} />
-    </Routes>
-  </BrowserRouter>
-  )
-}
+      <Router>
+        <Routes>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
 
-export default App
+          <Route path="/" element={<><SignedIn><Layout><Store /></Layout></SignedIn> <SignedOut>
+                <Navigate to="/sign-in" />
+              </SignedOut></>} />
+          <Route path="/store" element={<SignedIn><Layout><Store /></Layout></SignedIn>} />
+          <Route path="/sku" element={<SignedIn><Layout><Sku /></Layout></SignedIn>} />
+          <Route path="/planning" element={<SignedIn><Layout><Planning /></Layout></SignedIn>} />
+          <Route path="/charts" element={<SignedIn><Layout><Charts /></Layout></SignedIn>} />
+
+          {/* Redirect Unauthenticated Users */}
+          <Route
+            path="*"
+            element={
+              <SignedOut>
+                <Navigate to="/sign-in" />
+              </SignedOut>
+            }
+          />
+        </Routes>
+      </Router>
+    
+  );
+}

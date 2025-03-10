@@ -63,16 +63,17 @@ const SKUPage: React.FC = () => {
         >
           + Add SKU
         </button>
-        <div className="ag-theme-alpine w-full h-[600px] rounded-lg shadow-md border border-gray-200 overflow-hidden">
+        {/* FIXED HEIGHT - IMPORTANT FOR PAGINATION */}
+        <div className="ag-theme-alpine w-full" style={{ height: "600px" }}>
           <AgGridReact
             rowData={sku_data}
             columnDefs={columnDefs}
-            pagination={true}
-            paginationPageSize={5}
+            pagination={true} // Enable pagination
+            paginationPageSize={10} // Show 10 rows per page
+            paginationAutoPageSize={false} // Disable auto pagination
             modules={[ClientSideRowModelModule]}
-            domLayout='autoHeight'
-            rowHeight={55} 
-            headerHeight={70} 
+            rowHeight={55}
+            headerHeight={70}
           />
         </div>
       </div>
